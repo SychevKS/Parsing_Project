@@ -66,16 +66,15 @@ require_once('vendor/autoload.php');
 
 
     for($i = 0; $i < count($array_num); $i++) {
-        echo $array_num[$i].'<br>';
-        echo $array_occnum[$i].'<br>';
-        echo $array_email[$i].'<br>';
-        echo $array_link[$i].'<br>';
+        echo ($i+1).'.1. '.$array_num[$i].'<br>';
+        echo ($i+1).'.2. '.$array_occnum[$i].'<br>';    
+        echo ($i+1).'.3. '.$array_link[$i].'<br>';
+        echo ($i+1).'.4.1. '.$array_email[$i].'<br>';
 
         $mysqli->query("INSERT INTO `procs` (`ooc`, `num_occ`, `link`, `email`) VALUES ('$array_num[$i]', '$array_occnum[$i]', '$array_link[$i]', '$array_email[$i]')");
 
         for($j = 0; $j < count($array_docs[$i]); $j++) {
-            echo $d = $array_docs[$i][$j][0].'<br>';
-            echo $l = $array_docs[$i][$j][1].'<br>';
+            echo ($i+1).'.4.2.'.($j+1).' '.$d = $array_docs[$i][$j][0].' - '.$l = $array_docs[$i][$j][1].'<br>';
             $mysqli->query("INSERT INTO `docs` (`id_ooc`, `doc`, `link_doc`) VALUES ((SELEct `id_procs` FROM `procs` WHERE `ooc` = '$array_num[$i]'), '$d', '$l')");
         }
     }
